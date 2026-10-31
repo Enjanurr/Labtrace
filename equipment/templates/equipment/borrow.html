@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Borrow equipment{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
+  <h1 class="text-xl font-bold text-slate-900">Borrow equipment</h1>
+  <p class="mt-1 text-sm text-slate-500">
+    Linked to your visit at <strong>{{ visit.lab_location }}</strong> ({{ visit.get_purpose_display }}).
+  </p>
+
+  <form method="post" enctype="multipart/form-data" novalidate class="mt-6 space-y-4">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+      {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+    </div>
+    {% endif %}
+    {% include "authentication/_field.html" with field=form.asset %}
+    {% include "authentication/_field.html" with field=form.pre_condition %}
+    {% include "authentication/_field.html" with field=form.pre_condition_img %}
+    <button type="submit" class="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">Borrow</button>
+  </form>
+</div>
+{% endblock %}

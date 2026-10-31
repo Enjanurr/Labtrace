@@ -1,0 +1,20 @@
+{% for v in visits %}
+<tr class="visit-row">
+  <td class="py-2 pr-4">
+    <div class="font-medium text-slate-900">{{ v.user.username }}</div>
+    <div class="text-xs text-slate-500">{{ v.user.get_full_name|default:"-" }}</div>
+  </td>
+  <td class="py-2 pr-4">{{ v.user.get_role_display }}</td>
+  <td class="py-2 pr-4">{{ v.lab_location }}</td>
+  <td class="py-2 pr-4">{{ v.get_purpose_display }}</td>
+  <td class="py-2 pr-4">{{ v.check_in_time|date:"H:i" }} <span class="text-xs text-slate-500">({{ v.check_in_time|timesince }})</span></td>
+  <td class="py-2">
+    <button type="button"
+            class="js-checkout rounded-lg border border-red-300 px-2 py-1 text-xs font-medium text-red-600 hover:bg-red-50"
+            data-url="{% url 'access_logging:check_out' v.pk %}"
+            data-confirm="Check out {{ v.user.username }} from {{ v.lab_location }}?">Check out</button>
+  </td>
+</tr>
+{% empty %}
+<tr><td colspan="6" class="py-6 text-center text-slate-500">No active visits.</td></tr>
+{% endfor %}

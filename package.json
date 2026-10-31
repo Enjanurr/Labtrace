@@ -1,0 +1,15 @@
+{
+  "name": "lab",
+  "version": "1.0.0",
+  "description": "LabTrace - Offline Laboratory Asset & Access Logging SystemLabTrace is a modularized, production-ready Django web application designed for tracking laboratory attendance, managing hardware asset borrowing with condition checking, and logging laboratory incidents in strict offline environments.🚀 Quick Setup & Installation GuidePrerequisitesPython 3.11+Virtual environment tool (venv)1. Project Initialization# Set up virtual environment\r python3 -m venv .venv",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^4.3.3"
+  }
+}

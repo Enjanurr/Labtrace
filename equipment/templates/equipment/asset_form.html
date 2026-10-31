@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{% if asset %}Edit asset{% else %}Add asset{% endif %}{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
+  <h1 class="text-xl font-bold text-slate-900">{% if asset %}Edit {{ asset.asset_code }}{% else %}Add asset{% endif %}</h1>
+  <form method="post" novalidate class="mt-6 space-y-4">
+    {% csrf_token %}
+    {% include "authentication/_field.html" with field=form.asset_code %}
+    {% include "authentication/_field.html" with field=form.name %}
+    {% include "authentication/_field.html" with field=form.availability_status %}
+    <div class="flex gap-3">
+      <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">Save</button>
+      <a href="{% url 'equipment:inventory' %}" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

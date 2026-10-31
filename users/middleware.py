@@ -21,8 +21,10 @@ EXEMPT_PREFIXES = (
 # Anything not listed is open to every authenticated role.
 ROLE_RULES = [
     ("/users/manage/", {ADMIN}),
+    ("/visits/active/", {INSTRUCTOR, ADMIN}),
     ("/incidents/audit/", {INSTRUCTOR, ADMIN}),
     ("/incidents/manage/", {INSTRUCTOR, ADMIN}),
+     ("/equipment/manage/", {INSTRUCTOR, ADMIN}),
 ]
 
 

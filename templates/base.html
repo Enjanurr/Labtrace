@@ -1,54 +1,71 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}LabTrace{% endblock %} | LabTrace</title>
-  <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>{% block title %}LabTrace{% endblock %} | LabTrace</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-800 antialiased">
 
-  {% if user.is_authenticated %}
-  <nav class="border-b border-slate-200 bg-white">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-      <a href="{% url 'dashboard:home' %}" class="text-lg font-bold text-indigo-600">LabTrace</a>
-      <div class="flex items-center gap-4 text-sm">
-        {% if user.is_admin_role %}
-        <a href="{% url 'users:manage_list' %}" class="font-medium text-slate-600 hover:text-indigo-600">Users</a>
-        {% endif %}
-        <a href="{% url 'users:profile' %}" class="text-slate-600 hover:text-indigo-600">{{ user.username }}
-          <span class="ml-1 rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-medium text-indigo-700">{{ user.get_role_display }}</span>
-        </a>
-        <form method="post" action="{% url 'authentication:logout' %}">
-          {% csrf_token %}
-          <button type="submit" class="rounded-lg border border-slate-300 px-3 py-1.5 font-medium text-slate-700 hover:bg-slate-50">Log out</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  {% endif %}
+    {% if user.is_authenticated %}
+    <nav class="border-b border-slate-200 bg-white">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+            <a href="{% url 'dashboard:home' %}" class="text-lg font-bold text-indigo-600">LabTrace</a>
 
-  <main class="mx-auto max-w-6xl px-4 py-8">
-    {% if messages %}
-    <div class="mx-auto mb-6 max-w-md space-y-2">
-      {% for message in messages %}
-      <div class="flash-message rounded-lg border px-4 py-3 text-sm
-        {% if message.tags == 'success' %}border-green-200 bg-green-50 text-green-800
-        {% elif message.tags == 'error' %}border-red-200 bg-red-50 text-red-800
-        {% elif message.tags == 'warning' %}border-amber-200 bg-amber-50 text-amber-800
-        {% else %}border-blue-200 bg-blue-50 text-blue-800{% endif %}">
-        {{ message }}
-      </div>
-      {% endfor %}
-    </div>
+            <div class="flex items-center gap-4 text-sm">
+                <a href="{% url 'access_logging:check_in' %}" class="font-medium text-slate-600 hover:text-indigo-600">Check in</a>
+                <a href="{% url 'access_logging:my_visits' %}" class="font-medium text-slate-600 hover:text-indigo-600">My visits</a>
+
+                {% if user.is_staff_role %}
+                <a href="{% url 'access_logging:active' %}" class="font-medium text-slate-600 hover:text-indigo-600">Active visits</a>
+                {% endif %}
+
+                {% if user.is_admin_role %}
+                <a href="{% url 'users:manage_list' %}" class="font-medium text-slate-600 hover:text-indigo-600">Users</a>
+                {% endif %}
+
+                <a href="{% url 'users:profile' %}" class="text-slate-600 hover:text-indigo-600">
+                    {{ user.username }}
+                    <span class="ml-1 rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-medium text-indigo-700">{{ user.get_role_display }}</span>
+                </a>
+                <a href="{% url 'equipment:inventory' %}" class="font-medium text-slate-600 hover:text-indigo-600">Equipment</a>
+                <a href="{% url 'equipment:mine' %}" class="font-medium text-slate-600 hover:text-indigo-600">My equipment</a>
+                <form method="post" action="{% url 'authentication:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="rounded-lg border border-slate-300 px-3 py-1.5 font-medium text-slate-700 hover:bg-slate-50">Log out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
     {% endif %}
 
-    {% block content %}{% endblock %}
-  </main>
+    <main class="mx-auto max-w-6xl px-4 py-8">
 
-  <script src="{% static 'js/jquery.min.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-  {% block extra_js %}{% endblock %}
+        <div id="ajax-flash" class="mx-auto mb-6 max-w-md space-y-2"></div>
+
+        {% if messages %}
+        <div class="mx-auto mb-6 max-w-md space-y-2">
+            {% for message in messages %}
+            <div class="flash-message rounded-lg border px-4 py-3 text-sm
+                {% if message.tags == 'success' %}border-green-200 bg-green-50 text-green-800
+                {% elif message.tags == 'error' %}border-red-200 bg-red-50 text-red-800
+                {% elif message.tags == 'warning' %}border-amber-200 bg-amber-50 text-amber-800
+                {% else %}border-blue-200 bg-blue-50 text-blue-800{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

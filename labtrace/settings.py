@@ -72,6 +72,14 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+# Lab rooms offered in the check-in form. Edit to match your lab.
+LAB_LOCATIONS = [
+    "Computer Lab 1",
+    "Computer Lab 2",
+    "Networking Lab",
+    "Electronics Lab",
+    "Research Lab",
+]
 
 # --- Authentication -----------------------------------------------------
 AUTH_USER_MODEL = "authentication.User"

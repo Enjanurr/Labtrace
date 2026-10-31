@@ -11,8 +11,8 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     # Added in later steps:
     path("users/", include("users.urls")),
-    # path("visits/", include("access_logging.urls")),
-    # path("equipment/", include("equipment.urls")),
+    path("visits/", include("access_logging.urls")),
+    path("equipment/", include("equipment.urls")),
     # path("incidents/", include("incidents.urls")),
 ]
 
