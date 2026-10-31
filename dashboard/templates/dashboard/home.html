@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+  <h1 class="text-xl font-semibold text-slate-900">Session active</h1>
+  <dl class="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
+    <div><dt class="text-slate-500">Username</dt><dd class="font-medium text-slate-900">{{ user.username }}</dd></div>
+    <div><dt class="text-slate-500">Full name</dt><dd class="font-medium text-slate-900">{{ user.get_full_name|default:"-" }}</dd></div>
+    <div><dt class="text-slate-500">Email</dt><dd class="font-medium text-slate-900">{{ user.email }}</dd></div>
+    <div><dt class="text-slate-500">Role</dt><dd class="font-medium text-slate-900">{{ user.get_role_display }}</dd></div>
+  </dl>
+  <p class="mt-6 text-xs text-slate-500">Temporary page. The real dashboard replaces it in a later step.</p>
+</div>
+{% endblock %}

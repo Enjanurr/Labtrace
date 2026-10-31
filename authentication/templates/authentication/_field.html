@@ -1,0 +1,16 @@
+<div class="field">
+  <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ field.label }}</label>
+  <div class="relative mt-1">
+    {{ field }}
+    {% if toggle %}
+    <button type="button" data-target="#{{ field.id_for_label }}"
+            class="toggle-password absolute inset-y-0 right-0 px-3 text-xs font-medium text-slate-500 hover:text-slate-700">Show</button>
+    {% endif %}
+  </div>
+  {% if field.help_text and not field.errors %}
+  <p class="mt-1 text-xs text-slate-500">{{ field.help_text }}</p>
+  {% endif %}
+  {% for error in field.errors %}
+  <p class="field-error mt-1 text-xs font-medium text-red-600">{{ error }}</p>
+  {% endfor %}
+</div>

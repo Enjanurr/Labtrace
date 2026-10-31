@@ -1,0 +1,19 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: LabTrace password reset
+From: labtrace@localhost
+To: student3@cit.edu
+Date: Sat, 31 Oct 2026 05:23:40 -0000
+Message-ID: <179342422087.75360.5947290252928912072@LAPTOP-MEM8JO6D>
+
+Hello kenj,
+
+A password reset was requested for your LabTrace account.
+Open this link in your browser to choose a new password:
+
+http://127.0.0.1:8000/users/password-reset/confirm/Nw/dhbejg-778c4d7c131f2c708368b8294b42759f/
+
+If you didn't request this, ignore this message.
+
+-------------------------------------------------------------------------------
